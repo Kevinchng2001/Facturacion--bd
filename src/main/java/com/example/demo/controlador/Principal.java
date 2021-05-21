@@ -20,6 +20,7 @@ public class Principal {
 	public void insertarPersona() {
 		
 		Persona p1 = new Persona(15, "Kevin", "Chango", "456456", "1566484");
+		System.out.print("hola");
 		personaRepositorio.save(p1);
 	}
 }
