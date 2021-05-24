@@ -14,13 +14,18 @@ public class Principal {
 	PersonaRepositorio personaRepositorio;
 
 	public Principal() {
-		
+
 	}
-	
-	public void insertarPersona() {
-		
-		Persona p1 = new Persona(15, "Kevin", "Chango", "456456", "1566484");
+
+	public void insertarPersona()
+	{
+		try {
+		Persona p1= new Persona(2, "Sebastian", "Quevedo", "3423423", "534534534");
 		System.out.print("hola");
 		personaRepositorio.save(p1);
+		}catch (Exception e) {
+			System.out.println("Existe un errror el momento de guardar lapersoma");
+		}
 	}
+
 }
