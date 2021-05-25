@@ -26,6 +26,18 @@ public class Principal {
 		}catch (Exception e) {
 			System.out.println("Existe un errror el momento de guardar lapersoma");
 		}
+
+		
+		/*List<Persona> personas = personaRepository.findAll();
+		
+		for (Persona p : personas) {
+		
+			System.out.println(p.getNombre() + " " + p.getApellido());
+			
+		}*/
+		
+		Persona encontrado= personaRepositorio.findByCedula("534534534");
+		System.out.println(encontrado);
 	}
 
 }
