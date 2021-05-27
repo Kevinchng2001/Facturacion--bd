@@ -5,12 +5,12 @@ import java.io.FileNotFoundException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.session.RedisSessionProperties.ConfigureAction;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import com.example.demo.controlador.Principal;
 
+@SuppressWarnings("unused")
 @SpringBootApplication
 public class FacturaApplication {
 
@@ -21,7 +21,7 @@ public class FacturaApplication {
 		.web(WebApplicationType.NONE)
 		.run(args);
 		Principal p= contexto.getBean(Principal.class);
-		p.insertarPersona();
+		p.GUI();
 	}
 
 }
