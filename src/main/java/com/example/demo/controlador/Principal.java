@@ -20,8 +20,9 @@ public class Principal {
 
 	}
 
+	@SuppressWarnings("resource")
 	public void GUI() {
-		@SuppressWarnings("resource")
+		
 		Scanner entradaEscaner = new Scanner(System.in);
 		int entradaTeclado;
 		do {
@@ -45,9 +46,8 @@ public class Principal {
 				System.out.println("Ingrese el teléfono: ");
 				String telefono= entradaEscaner.next();
 				
-				Persona p = new Persona( entradaTeclado, nombre, apellido, telefono, cedula);
+				Persona p = new Persona(nombre, apellido, telefono, cedula);
 				personaRepositorio.save(p);
-				
 				break;
 			case 2:
 				//1 Pedir al usuario que persona quiero modificar "Pedir la cédula"
@@ -58,6 +58,7 @@ public class Principal {
 				try {
 				System.out.println("Ingrese el número de cédula que desea eliminar: ");
 				String cedulaBuscar= entradaEscaner.next();
+				
 				Persona personaRecuperada= personaRepositorio.findByCedula(cedulaBuscar);
 				personaRepositorio.delete(personaRecuperada);
 				//1 Pedir al usuario que persona quiero modificar "Pedir la cédula"
@@ -66,15 +67,16 @@ public class Principal {
 				}catch(Exception e) {System.out.println("Existe un problema con la cédula ingresada ");}
 				break;
 			case 4:
-					//Buscar todas las personas que están en la BD e imprimir os resultados
+					
 				
-				List<Persona> personas= personaRepositorio.findAll();
+				List<Persona> personas= personaRepositorio.buscarPorNombreLike("Gabriela");
 				System.out.println("Cédula|"+ "\t"+ "|Nombre|"+"\t" + "|Apellido|");
 				for (Persona persona : personas) {
 					System.out.println(persona.getCedula()+" "+ persona.getNombre()+" " + persona.getApellido());
 				}
 				break;
 			case 5:
+				
 				System.exit(0);	
 				break;
 
@@ -82,6 +84,7 @@ public class Principal {
 				break;
 			}
 		} while (entradaTeclado != 5);
+
 
 	}
 

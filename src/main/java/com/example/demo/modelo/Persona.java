@@ -39,6 +39,14 @@ public class Persona {
 		super();
 	}
 	
+	public Persona(String nombre2, String apellido2, String telefono2, String cedula2) {
+		// TODO Auto-generated constructor stub
+	}
+
+	//public Persona(String nombre2, String apellido2, String telefono2, String cedula2) {
+		// TODO Auto-generated constructor stub
+//	}
+
 	public int getId() {
 		return id;
 	}
