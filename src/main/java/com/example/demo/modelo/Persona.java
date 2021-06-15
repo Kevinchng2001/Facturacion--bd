@@ -20,15 +20,16 @@ public class Persona {
 	
 	@Column(length = 30)
 	private String apellido;
+	
 	private String telefono;
+	
 	@Column(nullable = false,unique = true)
 	private String cedula;
 		
 	
 	
-	public Persona(int id, String nombre, String apellido, String telefono, String cedula) {
+	public Persona( String nombre, String apellido, String telefono, String cedula) {
 		super();
-		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.telefono = telefono;
@@ -39,14 +40,6 @@ public class Persona {
 		super();
 	}
 	
-	public Persona(String nombre2, String apellido2, String telefono2, String cedula2) {
-		// TODO Auto-generated constructor stub
-	}
-
-	//public Persona(String nombre2, String apellido2, String telefono2, String cedula2) {
-		// TODO Auto-generated constructor stub
-//	}
-
 	public int getId() {
 		return id;
 	}
@@ -77,12 +70,10 @@ public class Persona {
 	public void setCedula(String cedula) {
 		this.cedula = cedula;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono
 				+ ", cedula=" + cedula + "]";
 	}
-	
-
 }
