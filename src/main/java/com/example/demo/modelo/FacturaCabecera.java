@@ -70,5 +70,11 @@ public class FacturaCabecera {
 	}
 	public void setDetallesFacturas(List<DetalleFactura> detallesFacturas) {
 		this.detallesFacturas = detallesFacturas;
+		double total=0;
+		for (DetalleFactura detalleFactura : detallesFacturas) {
+			total=total+detalleFactura.getValorVenta();
+		}
+		this.totalFactura=total;
+		
 	}
 }
