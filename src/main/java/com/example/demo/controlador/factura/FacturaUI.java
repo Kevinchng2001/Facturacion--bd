@@ -1,8 +1,23 @@
 package com.example.demo.controlador.factura;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
-import java.awt.Font;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,19 +29,11 @@ import com.example.demo.modelo.DetalleFactura;
 import com.example.demo.modelo.FacturaCabecera;
 import com.example.demo.modelo.Persona;
 import com.example.demo.modelo.Producto;
-
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.awt.event.ActionEvent;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import java.awt.Color;
 
 @Controller
-public class FacturaUI  extends JInternalFrame {
-	
+public class FacturaUI extends JInternalFrame {
+
 	private JTextField txtNumFactuta;
 	private JTextField txtCedula;
 	private JLabel lblFecha;
@@ -61,14 +68,19 @@ public class FacturaUI  extends JInternalFrame {
 	private JLabel lblNewLabel_4;
 	private JTextField txtCantidad;
 	private JButton btnAgregar;
+	private JLabel lblNewLabel_5;
+	private JLabel lblNewLabel_6;
+	private JLabel lblNewLabel_7;
+	private JTable table;
 
 	public FacturaUI() {
+		getContentPane().setBackground(new Color(230, 230, 250));
 		detallesFacturas=new ArrayList<>();
 		producto=new Producto();
 		
 		modelo=new DetalleFacturaItemModel(detallesFacturas);
 		fc=new FacturaCabecera();
-		setBounds(100, 100, 617, 403);
+		setBounds(100, 100, 624, 543);
 		getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Sistema de Facturación Integral");
@@ -77,7 +89,7 @@ public class FacturaUI  extends JInternalFrame {
 		getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Número Factura");
-		lblNewLabel_1.setBounds(398, 54, 85, 14);
+		lblNewLabel_1.setBounds(494, 75, 85, 14);
 		getContentPane().add(lblNewLabel_1);
 		
 		txtNumFactuta = new JTextField();
@@ -86,12 +98,12 @@ public class FacturaUI  extends JInternalFrame {
 		txtNumFactuta.setColumns(10);
 		
 		lblFecha = new JLabel("");
-		lblFecha.setBounds(419, 11, 181, 14);
+		lblFecha.setBounds(421, 11, 181, 14);
 		getContentPane().add(lblFecha);
 		lblFecha.setText(new Date().toString());
 		
 		txtCedula = new JTextField();
-		txtCedula.setBounds(84, 67, 86, 20);
+		txtCedula.setBounds(145, 164, 86, 20);
 		getContentPane().add(txtCedula);
 		txtCedula.setColumns(10);
 		
@@ -108,24 +120,20 @@ public class FacturaUI  extends JInternalFrame {
 				
 			}
 		});
-		btnBuscar.setBounds(187, 67, 85, 20);
+		btnBuscar.setBounds(257, 163, 85, 20);
 		getContentPane().add(btnBuscar);
 		
 		JLabel lblNewLabel_2 = new JLabel("Cédula");
-		lblNewLabel_2.setBounds(10, 70, 64, 14);
+		lblNewLabel_2.setBounds(56, 166, 64, 14);
 		getContentPane().add(lblNewLabel_2);
 		
 		lblNombre = new JLabel("");
-		lblNombre.setBounds(83, 116, 112, 14);
+		lblNombre.setBounds(180, 265, 112, 14);
 		getContentPane().add(lblNombre);
 		
 		lblApellido = new JLabel("");
-		lblApellido.setBounds(195, 116, 100, 14);
+		lblApellido.setBounds(302, 265, 100, 14);
 		getContentPane().add(lblApellido);
-		
-		lblCedula = new JLabel("");
-		lblCedula.setBounds(305, 116, 111, 14);
-		getContentPane().add(lblCedula);
 		
 		btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
@@ -139,11 +147,11 @@ public class FacturaUI  extends JInternalFrame {
 				fCR.save(fc);
 			}
 		});
-		btnGuardar.setBounds(259, 339, 89, 23);
+		btnGuardar.setBounds(257, 481, 89, 23);
 		getContentPane().add(btnGuardar);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(56, 192, 495, 143);
+		scrollPane.setBounds(56, 300, 495, 171);
 		getContentPane().add(scrollPane);
 		
 		tableDetalleFactura = new JTable();
@@ -151,11 +159,11 @@ public class FacturaUI  extends JInternalFrame {
 		tableDetalleFactura.setModel(modelo);
 		
 		JLabel lblNewLabel_3 = new JLabel("Producto");
-		lblNewLabel_3.setBounds(56, 132, 46, 14);
+		lblNewLabel_3.setBounds(56, 66, 79, 14);
 		getContentPane().add(lblNewLabel_3);
 		
 		txtProducto = new JTextField();
-		txtProducto.setBounds(109, 129, 86, 20);
+		txtProducto.setBounds(145, 64, 86, 20);
 		getContentPane().add(txtProducto);
 		txtProducto.setColumns(10);
 		
@@ -166,7 +174,7 @@ public class FacturaUI  extends JInternalFrame {
 				lblNombreProducto.setText(producto.getNombre());
 			}
 		});
-		btnBuscarProducto.setBounds(205, 128, 89, 23);
+		btnBuscarProducto.setBounds(257, 66, 89, 23);
 		getContentPane().add(btnBuscarProducto);
 		
 		lblNombreProducto = new JLabel("");
@@ -174,11 +182,11 @@ public class FacturaUI  extends JInternalFrame {
 		getContentPane().add(lblNombreProducto);
 		
 		lblNewLabel_4 = new JLabel("Cantidad");
-		lblNewLabel_4.setBounds(56, 157, 46, 14);
+		lblNewLabel_4.setBounds(56, 108, 79, 14);
 		getContentPane().add(lblNewLabel_4);
 		
 		txtCantidad = new JTextField();
-		txtCantidad.setBounds(109, 160, 86, 20);
+		txtCantidad.setBounds(145, 106, 86, 20);
 		getContentPane().add(txtCantidad);
 		txtCantidad.setColumns(10);
 		
@@ -191,9 +199,31 @@ public class FacturaUI  extends JInternalFrame {
 				generarTabla();
 			}
 		});
-		btnAgregar.setBounds(206, 158, 89, 23);
+		btnAgregar.setBounds(257, 99, 89, 23);
 		getContentPane().add(btnAgregar);
+		
+		lblCedula = new JLabel("");
+		lblCedula.setBounds(76, 265, 119, 14);
+		getContentPane().add(lblCedula);
+		
+		lblNewLabel_5 = new JLabel("ID");
+		lblNewLabel_5.setBounds(84, 209, 45, 13);
+		getContentPane().add(lblNewLabel_5);
+		
+		lblNewLabel_6 = new JLabel("NOMBRE");
+		lblNewLabel_6.setBounds(179, 209, 79, 13);
+		getContentPane().add(lblNewLabel_6);
+		
+		lblNewLabel_7 = new JLabel("APELLIDO");
+		lblNewLabel_7.setBounds(302, 209, 60, 13);
+		getContentPane().add(lblNewLabel_7);
+		
+		table = new JTable();
+		table.setBounds(56, 208, 353, 82);
+		getContentPane().add(table);
 
+		
+		
 	}
 	
 	public void generarTabla() {
@@ -203,5 +233,4 @@ public class FacturaUI  extends JInternalFrame {
 		tableDetalleFactura.setModel(modelo);
 
 	}
-
 }

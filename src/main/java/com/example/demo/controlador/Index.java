@@ -1,39 +1,54 @@
 package com.example.demo.controlador;
 
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.example.demo.controlador.Persona.PersonaUI;
+import com.example.demo.controlador.Producto.ProductoUI;
 import com.example.demo.controlador.factura.FacturaUI;
+import com.example.demo.infraestructura.servicios.FacturaReporteService;
+import com.example.demo.infraestructura.servicios.PersonaReporteService;
+import com.example.demo.infraestructura.servicios.ProductoReporteService;
 
-@SuppressWarnings("serial")
+import net.sf.jasperreports.engine.JRException;
+
 @Controller
-public class Index extends  JFrame {
+public class Index extends JFrame {
 
-	//private JPanel contentPane;
-	
+
 	JDesktopPane desktopPanel;
 	
 	@Autowired
 	PersonaUI pUI;
 	
-	@Autowired
-	PersonaModificarUI pModificarUI;
 
 	@Autowired
 	FacturaUI facturaUI;
-	/**
-	 * Create the frame.
-	 */
+	@Autowired
+	PersonaReporteService personaReporteService;
+	@Autowired
+	FacturaReporteService facturaReporteService;
+	@Autowired
+	ProductoReporteService productoReporteService;
+	@Autowired
+	ProductoUI ProductoUI;
+	
+
 	public Index() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -58,32 +73,91 @@ public class Index extends  JFrame {
 		});
 		mnNewMenu.add(miPNuevo);
 		
-		JMenuItem miPModificar = new JMenuItem("Modificar");
-		miPModificar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				pModificarUI.setVisible(true);
-				desktopPanel.add(pModificarUI);
+		JMenuItem mntmNewMenuItem = new JMenuItem("ReportePersona");
+		mnNewMenu.add(mntmNewMenuItem);
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					personaReporteService.generarReporte();
+					try
+
+					{
+
+					Process pro = Runtime.getRuntime().exec ("rundll32 SHELL32.DLL,ShellExec_RunDLL "+"C:\\Users\\ASUS\\OneDrive\\Reporte_Personas.pdf");
+
+					}catch (Exception evvv)
+
+	{
+
+	JOptionPane.showMessageDialog(null, "No se puede abrir el archivo de ayuda, probablemente fue borrado","ERROR",JOptionPane.ERROR_MESSAGE);
+
+	 
+
+	}
+					
+				} catch (FileNotFoundException | JRException e) {
+					
+					
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
-		mnNewMenu.add(miPModificar);
+
+
 		
-		JMenuItem miPEliminar = new JMenuItem("Eliminar");
-		mnNewMenu.add(miPEliminar);
+		JMenu menuPersona = new JMenu("Factura");
+		menuBar.add(menuPersona);
 		
-		JMenuItem miPListar = new JMenuItem("Listar");
-		mnNewMenu.add(miPListar);
-		
-		JMenu mnNewMenu_1 = new JMenu("Factura");
-		menuBar.add(mnNewMenu_1);
-		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Nueva Factura");
-		mntmNewMenuItem.addActionListener(new ActionListener() {
+		JMenuItem nuevopersona = new JMenuItem("Nueva Factura");
+		nuevopersona.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				facturaUI.setVisible(true);
 				desktopPanel.add(facturaUI);
 			}
 		});
-		mnNewMenu_1.add(mntmNewMenuItem);
+		menuPersona.add(nuevopersona);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("ReporteFactura");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			
+				try {
+					facturaReporteService.generarReporte();
+				} catch (FileNotFoundException | JRException e) {
+					
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}}
+		});
+		menuPersona.add(mntmNewMenuItem_1);
+		
+		JMenu menuProducto = new JMenu("Producto");
+		menuBar.add(menuProducto);
+		
+		JMenuItem nuevoproducto = new JMenuItem("Nuevo");
+		
+		nuevoproducto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			ProductoUI.setVisible(true);
+				desktopPanel.add(ProductoUI);
+			}
+		});
+		menuProducto.add(nuevoproducto);
+		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("ReporteProducto");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					productoReporteService.generarReporte();
+					
+				} catch (FileNotFoundException | JRException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}}
+			
+		});
+		menuProducto.add(mntmNewMenuItem_2);
 		//contentPane = new JPanel();
 		//setContentPane(contentPane);
 		

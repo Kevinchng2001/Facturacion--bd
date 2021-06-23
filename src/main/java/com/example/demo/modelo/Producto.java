@@ -75,4 +75,11 @@ public class Producto {
 	public void setStock(String cantidad) {
 		this.stock = cantidad;
 	}
+	
+	@Override
+	public String toString() {
+		return "Persona [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio
+				+ ", stock=" + stock + "]";
+	}
+	
 }
